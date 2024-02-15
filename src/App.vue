@@ -22,6 +22,7 @@
             <th>Actividad</th>
             <th>prioridad</th>
             <th>Fecha</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
             <td>{{ item.actividad }}</td>
             <td :style="item.prioridad=== 'alta'? 'background: orange':'' ">{{ item.prioridad }}</td>
             <td>{{ item.fecha }}</td>
+            <td >
+              <button @click="eliminar(i)">❌</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -67,6 +71,10 @@ function enviar() {
   }
   arr.value.push(agenda)
   console.log(arr)
+}
+
+function eliminar(i){
+  arr.value.splice(i,1)
 }
 
 function organizar() {
