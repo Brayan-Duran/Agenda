@@ -74,7 +74,7 @@ function enviar() {
 }
 
 function eliminar(i){
-  arr.value.splice(i,1)
+  arr.value.splice(i,1) 
 }
 
 function organizar() {
