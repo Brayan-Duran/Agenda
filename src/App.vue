@@ -45,12 +45,15 @@
 <script setup>
 
 import { ref } from "vue"
+import Swal from 'sweetalert2'
 
 let arr = ref([])
 let actividad = ref("")
 let prio = ref("")
 let fecha = ref("")
 let cheked = ref("")
+let alert = ref("")
+
 
 
 
@@ -62,15 +65,43 @@ function enviar() {
     prio.value = "baja"
   }
 
-  console.log(prio.value)
+ if(actividad.value === ""){
+    Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Ingrese una actividad para continuar",
+  timer: 3500
+});
+ }else if(fecha.value === ""){
+  Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Seleccione una fecha para continuar",
+  timer: 3500
+});
+ }else{
+   const agenda = {
+     actividad: actividad.value,
+     prioridad: prio.value,
+     fecha: fecha.value
+   }
+   arr.value.push(agenda)
+   console.log(arr)
+   limpiar()
+  Swal.fire({
+  icon: "success",
+  title: "Actividad agendada",
+  timer: 3500
+});
+ }
 
-  const agenda = {
-    actividad: actividad.value,
-    prioridad: prio.value,
-    fecha: fecha.value
-  }
-  arr.value.push(agenda)
-  console.log(arr)
+}
+
+function limpiar(){
+
+  actividad.value = ""
+  fecha.value = ""
+
 }
 
 function eliminar(i){
